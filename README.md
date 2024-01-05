@@ -7,3 +7,6 @@ main/src/main/java/com/example/roomsandapartments -> main code
 6. mappers -> map entities to dto and vice versa
 7. model -> entities. This is how tables looks like in database
 8. repository / service -> entire logic of code
+
+
+![image](https://github.com/aurielback/oszusciZeZnanejStrony/assets/99736860/e7e83770-db72-475d-844d-5656c3e71499)
