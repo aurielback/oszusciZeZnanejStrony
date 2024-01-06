@@ -1,8 +1,7 @@
 package com.example.roomsandapartments.controller;
 
 import com.example.roomsandapartments.dto.RoomDto;
-import com.example.roomsandapartments.service.RoomService;
-import org.springframework.http.HttpStatus;
+import com.example.roomsandapartments.service.serviceImpl.RoomServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,38 +11,38 @@ import java.util.List;
 @RequestMapping("api/v1/room")
 public class RoomController {
 
-    private final RoomService roomService;
+    private final RoomServiceImpl roomServiceImpl;
 
-    public RoomController(RoomService roomService) {
-        this.roomService = roomService;
+    public RoomController(RoomServiceImpl roomServiceImpl) {
+        this.roomServiceImpl = roomServiceImpl;
     }
 
     @PostMapping("/add")
     public ResponseEntity<String> addRoom(@RequestBody RoomDto room) {
-        roomService.addRoom(room);
+        roomServiceImpl.addRoom(room);
         return ResponseEntity.ok("Created!");
     }
 
     @GetMapping("/all")
     public List<RoomDto> getAllRooms() {
-        return roomService.getAllRooms();
+        return roomServiceImpl.getAllRooms();
     }
 
     @GetMapping("/{id}")
     @ResponseBody
     public RoomDto getRoomById(@PathVariable Long id) {
-        return roomService.findRoomById(id);
+        return roomServiceImpl.findRoomById(id);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRoom(@PathVariable Long id) {
-        roomService.deleteRoomById(id);
+        roomServiceImpl.deleteRoomById(id);
         return ResponseEntity.ok("Deleted!");
     }
 
     @PutMapping("{id}")
     public ResponseEntity<String> updateRoom(@PathVariable Long id, @RequestBody RoomDto roomDto) {
-        roomService.updateRoom(roomDto, id);
+        roomServiceImpl.updateRoom(roomDto, id);
         return ResponseEntity.ok("Updated!");
     }
 }

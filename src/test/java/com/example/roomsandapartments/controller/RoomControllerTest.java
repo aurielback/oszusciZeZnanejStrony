@@ -1,9 +1,7 @@
 package com.example.roomsandapartments.controller;
-import static org.mockito.Mockito.doAnswer;
 
 import com.example.roomsandapartments.dto.RoomDto;
-import com.example.roomsandapartments.service.RoomService;
-import com.fasterxml.jackson.core.JsonProcessingException;
+import com.example.roomsandapartments.service.serviceImpl.RoomServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -31,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class RoomControllerTest {
 
     @Mock
-    private RoomService roomService;
+    private RoomServiceImpl roomServiceImpl;
 
     @InjectMocks
     private RoomController roomController;
@@ -54,7 +51,7 @@ public class RoomControllerTest {
         roomDto.setStandardEquipment(true);
 
         // When
-        when(roomService.findRoomById(anyLong())).thenReturn(roomDto);
+        when(roomServiceImpl.findRoomById(anyLong())).thenReturn(roomDto);
 
         // Then
         mockMvc.perform(get("/api/v1/room/" + id)
@@ -78,7 +75,7 @@ public class RoomControllerTest {
         roomDto.setStandardEquipment(true);
 
         // When
-        doNothing().when(roomService).addRoom(any(RoomDto.class));
+        doNothing().when(roomServiceImpl).addRoom(any(RoomDto.class));
 
         // Then
         mockMvc.perform(post("/api/v1/room/add")
@@ -87,7 +84,7 @@ public class RoomControllerTest {
                 .andExpect(status().isOk());
 
         // Verify if the service method was called with the correct parameter
-        verify(roomService).addRoom(any(RoomDto.class));
+        verify(roomServiceImpl).addRoom(any(RoomDto.class));
     }
 
     @Test
@@ -110,7 +107,7 @@ public class RoomControllerTest {
         List<RoomDto> roomDtoList = Arrays.asList(roomDto1, roomDto2);
 
         // When
-        when(roomService.getAllRooms()).thenReturn(roomDtoList);
+        when(roomServiceImpl.getAllRooms()).thenReturn(roomDtoList);
 
         // Then
         mockMvc.perform(get("/api/v1/room/all/"))
@@ -132,7 +129,7 @@ public class RoomControllerTest {
         long id1 = 1L;
 
         // When
-        doNothing().when(roomService).deleteRoomById(anyLong());
+        doNothing().when(roomServiceImpl).deleteRoomById(anyLong());
 
         ResultActions resultActions = mockMvc.perform(delete("/api/v1/room/" + id1)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -152,7 +149,7 @@ public class RoomControllerTest {
         roomDto.setStandardEquipment(false);
 
         // When
-        doNothing().when(roomService).updateRoom(any(RoomDto.class), anyLong());
+        doNothing().when(roomServiceImpl).updateRoom(any(RoomDto.class), anyLong());
 
         // Then
         mockMvc.perform(put("/api/v1/room/" + id)
@@ -161,7 +158,7 @@ public class RoomControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Updated!"));
 
-        verify(roomService).updateRoom(any(), eq(id));
+        verify(roomServiceImpl).updateRoom(any(), eq(id));
     }
 
 }

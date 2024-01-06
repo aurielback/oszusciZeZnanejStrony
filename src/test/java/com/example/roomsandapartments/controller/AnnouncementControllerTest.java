@@ -3,7 +3,7 @@ package com.example.roomsandapartments.controller;
 import com.example.roomsandapartments.dto.AnnouncementDto;
 import com.example.roomsandapartments.dto.RoomDto;
 import com.example.roomsandapartments.enums.City;
-import com.example.roomsandapartments.service.AnnouncementService;
+import com.example.roomsandapartments.service.serviceImpl.AnnouncementServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class AnnouncementControllerTest {
 
     @Mock
-    private AnnouncementService announcementService;
+    private AnnouncementServiceImpl announcementServiceImpl;
 
     @InjectMocks
     private AnnouncementController announcementController;
@@ -68,7 +68,7 @@ public class AnnouncementControllerTest {
         announcementDto.setRooms(roomDtoList);
 
         // When
-        when(announcementService.findAnnouncementById(anyLong())).thenReturn(announcementDto);
+        when(announcementServiceImpl.findAnnouncementById(anyLong())).thenReturn(announcementDto);
 
         // Then
         mockMvc.perform(get("/api/v1/announcement/" + id)
@@ -103,7 +103,7 @@ public class AnnouncementControllerTest {
         announcementDto.setRooms(roomDtoList);
 
         // When
-        doNothing().when(announcementService).addAnnouncement(any(AnnouncementDto.class));
+        doNothing().when(announcementServiceImpl).addAnnouncement(any(AnnouncementDto.class));
 
         // Then
         mockMvc.perform(post("/api/v1/announcement/add")
@@ -112,7 +112,7 @@ public class AnnouncementControllerTest {
                 .andExpect(status().isOk());
 
         // Verify if the service method was called with the correct parameter
-        verify(announcementService).addAnnouncement(any(AnnouncementDto.class));
+        verify(announcementServiceImpl).addAnnouncement(any(AnnouncementDto.class));
     }
 
     @Test
@@ -153,7 +153,7 @@ public class AnnouncementControllerTest {
         String expectedJson = objectMapper.writeValueAsString(announcementDtoList);
 
         // When
-        when(announcementService.getAllAnnouncements()).thenReturn(announcementDtoList);
+        when(announcementServiceImpl.getAllAnnouncements()).thenReturn(announcementDtoList);
 
         // Then
         mockMvc.perform(get("/api/v1/announcement/all/"))
@@ -167,7 +167,7 @@ public class AnnouncementControllerTest {
         long id1 = 1L;
 
         // When
-        doNothing().when(announcementService).deleteAnnouncementById(anyLong());
+        doNothing().when(announcementServiceImpl).deleteAnnouncementById(anyLong());
 
         ResultActions resultActions = mockMvc.perform(delete("/api/v1/announcement/" + id1)
                         .contentType(MediaType.APPLICATION_JSON))
@@ -203,7 +203,7 @@ public class AnnouncementControllerTest {
 
 
         // When
-        doNothing().when(announcementService).updateAnnouncement(any(AnnouncementDto.class), anyLong());
+        doNothing().when(announcementServiceImpl).updateAnnouncement(any(AnnouncementDto.class), anyLong());
 
         // Then
         mockMvc.perform(put("/api/v1/announcement/" + id)
@@ -212,7 +212,7 @@ public class AnnouncementControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string("Updated!"));
 
-        verify(announcementService).updateAnnouncement(any(), eq(id));
+        verify(announcementServiceImpl).updateAnnouncement(any(), eq(id));
     }
 
 }
