@@ -21,7 +21,7 @@ public class AnnouncementController {
     @PostMapping("/add")
     public ResponseEntity<String> addAnnouncement(@RequestBody AnnouncementDto announcement) {
         announcementService.addAnnouncement(announcement);
-        return new ResponseEntity<String>("Created!", HttpStatus.CREATED);
+        return ResponseEntity.ok("Created!");
     }
 
     @GetMapping("/all")
@@ -38,13 +38,13 @@ public class AnnouncementController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAnnouncement(@PathVariable Long id) {
         announcementService.deleteAnnouncementById(id);
-        return new ResponseEntity<>("Deleted!", HttpStatus.OK);
+        return ResponseEntity.ok("Deleted!");
     }
 
     @PutMapping("{id}")
     public ResponseEntity<String> updateAnnouncement(@PathVariable Long id, @RequestBody AnnouncementDto announcementDto) {
         announcementService.updateAnnouncement(announcementDto, id);
-        return new ResponseEntity<>("Updated!", HttpStatus.OK);
+        return ResponseEntity.ok("Updated!");
     }
 
 }
