@@ -1,6 +1,6 @@
 package com.example.roomsandapartments.controller;
 
-import com.example.roomsandapartments.dto.room.AnnouncementDto;
+import com.example.roomsandapartments.dto.AnnouncementDto;
 import com.example.roomsandapartments.service.AnnouncementService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

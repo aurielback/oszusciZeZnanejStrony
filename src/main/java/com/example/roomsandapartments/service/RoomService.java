@@ -1,6 +1,6 @@
 package com.example.roomsandapartments.service;
 
-import com.example.roomsandapartments.dto.room.RoomDto;
+import com.example.roomsandapartments.dto.RoomDto;
 import com.example.roomsandapartments.exceptions.RoomNotFoundException;
 import com.example.roomsandapartments.mappers.RoomMapper;
 

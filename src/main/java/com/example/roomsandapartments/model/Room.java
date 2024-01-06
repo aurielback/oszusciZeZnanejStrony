@@ -12,6 +12,9 @@ public class Room {
     )
     private Long id;
 
+    @Version
+    private Long version;
+
     @Column(
             name = "area"
     )
@@ -42,6 +45,22 @@ public class Room {
         this.standardEquipment = standardEquipment;
         this.specialEquipment = specialEquipment;
 
+    }
+
+    public Room(Long id, Long version, double area, boolean standardEquipment, boolean specialEquipment) {
+        this.id = id;
+        this.version = version;
+        this.area = area;
+        this.standardEquipment = standardEquipment;
+        this.specialEquipment = specialEquipment;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public void setId(Long id) {

@@ -1,6 +1,6 @@
 package com.example.roomsandapartments.mappers;
 
-import com.example.roomsandapartments.dto.room.RoomDto;
+import com.example.roomsandapartments.dto.RoomDto;
 import com.example.roomsandapartments.model.Room;
 import org.mapstruct.Mapper;
 

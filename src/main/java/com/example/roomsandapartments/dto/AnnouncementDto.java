@@ -1,4 +1,4 @@
-package com.example.roomsandapartments.dto.room;
+package com.example.roomsandapartments.dto;
 
 import com.example.roomsandapartments.enums.City;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnnouncementDto {
+
+    @JsonProperty("announcement_id")
+    private Long id;
 
     @JsonProperty("city")
     private City city;
@@ -20,6 +23,20 @@ public class AnnouncementDto {
     public AnnouncementDto(City city, List<RoomDto> rooms) {
         this.city = city;
         this.rooms = rooms;
+    }
+
+    public AnnouncementDto(Long id, City city, List<RoomDto> rooms) {
+        this.id = id;
+        this.city = city;
+        this.rooms = rooms;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public City getCity() {

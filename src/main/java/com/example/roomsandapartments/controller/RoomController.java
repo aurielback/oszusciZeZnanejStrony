@@ -1,6 +1,6 @@
 package com.example.roomsandapartments.controller;
 
-import com.example.roomsandapartments.dto.room.RoomDto;
+import com.example.roomsandapartments.dto.RoomDto;
 import com.example.roomsandapartments.service.RoomService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class RoomController {
     @PostMapping("/add")
     public ResponseEntity<String> addRoom(@RequestBody RoomDto room) {
         roomService.addRoom(room);
-        return new ResponseEntity<String>("Created!", HttpStatus.CREATED);
+        return ResponseEntity.ok("Created!");
     }
 
     @GetMapping("/all")
@@ -38,13 +38,13 @@ public class RoomController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteRoom(@PathVariable Long id) {
         roomService.deleteRoomById(id);
-        return new ResponseEntity<>("Deleted!", HttpStatus.OK);
+        return ResponseEntity.ok("Deleted!");
     }
 
     @PutMapping("{id}")
     public ResponseEntity<String> updateRoom(@PathVariable Long id, @RequestBody RoomDto roomDto) {
         roomService.updateRoom(roomDto, id);
-        return new ResponseEntity<>("Updated!", HttpStatus.OK);
+        return ResponseEntity.ok("Updated!");
     }
 }
 

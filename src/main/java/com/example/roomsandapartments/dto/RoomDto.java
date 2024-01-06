@@ -1,8 +1,12 @@
-package com.example.roomsandapartments.dto.room;
+package com.example.roomsandapartments.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RoomDto {
+
+    @JsonProperty("room_id")
+    private Long id;
+
     @JsonProperty("area")
     private double area;
 
@@ -20,6 +24,21 @@ public class RoomDto {
         this.area = area;
         this.standardEquipment = standardEquipment;
         this.specialEquipment = specialEquipment;
+    }
+
+    public RoomDto(Long id, double area, boolean standardEquipment, boolean specialEquipment) {
+        this.id = id;
+        this.area = area;
+        this.standardEquipment = standardEquipment;
+        this.specialEquipment = specialEquipment;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public double getArea() {

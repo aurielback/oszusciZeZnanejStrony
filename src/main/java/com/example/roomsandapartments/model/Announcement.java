@@ -16,6 +16,9 @@ public class Announcement {
     )
     private Long id;
 
+    @Version
+    private Long version;
+
     @Enumerated(EnumType.STRING)
     private City city;
 
@@ -37,6 +40,21 @@ public class Announcement {
         this.id = id;
         this.city = city;
         this.rooms = rooms;
+    }
+
+    public Announcement(Long id, Long version, City city, List<Room> rooms) {
+        this.id = id;
+        this.version = version;
+        this.city = city;
+        this.rooms = rooms;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     public Long getId() {
