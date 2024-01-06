@@ -9,6 +9,7 @@ import com.example.roomsandapartments.model.Announcement;
 import com.example.roomsandapartments.model.Room;
 import com.example.roomsandapartments.repository.AnnouncementRepository;
 import com.example.roomsandapartments.repository.RoomRepository;
+import com.example.roomsandapartments.service.AnnouncementService;
 import jakarta.transaction.Transactional;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AnnouncementServiceImpl {
+public class AnnouncementServiceImpl implements AnnouncementService {
 
     private final AnnouncementRepository announcementRepository;
     private final RoomRepository roomRepository;
@@ -42,6 +43,9 @@ public class AnnouncementServiceImpl {
                 .orElseThrow(() -> new IllegalArgumentException("AnnouncementDto cannot be null"));
         try {
             Announcement announcementEntity = announcementMapper.announcementDtoToAnnouncementEntity(announcementDto);
+            announcementEntity.getRooms().forEach(
+                    room -> room.setAnnouncement(announcementEntity)
+            );
             roomRepository.saveAll(announcementEntity.getRooms());
             announcementRepository.save(announcementEntity);
         } catch (DataAccessException e) {

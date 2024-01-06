@@ -25,7 +25,7 @@ public class Announcement {
     @Column(
             name = "rooms"
     )
-    @OneToMany
+    @OneToMany(mappedBy = "announcement")
     private List<Room> rooms = new ArrayList<>();
 
     public Announcement() {
@@ -48,6 +48,7 @@ public class Announcement {
         this.city = city;
         this.rooms = rooms;
     }
+
 
     public Long getVersion() {
         return version;

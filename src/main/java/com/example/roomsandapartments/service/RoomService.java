@@ -13,14 +13,14 @@ public interface RoomService {
      *
      * @param roomDto transfer object of Room entity
      */
-    public void addRoom(RoomDto roomDto);
+    void addRoom(RoomDto roomDto);
 
     /**
      * get all rooms from database
      *
      * @return RoomDto
      */
-    public List<RoomDto> getAllRooms();
+    List<RoomDto> getAllRooms();
 
     /**
      * get room by id
@@ -28,14 +28,14 @@ public interface RoomService {
      * @param id room's id
      * @return optional Room
      */
-    public RoomDto findRoomById(Long id);
+    RoomDto findRoomById(Long id);
 
     /**
      * delete room by id
      *
      * @param id room's id
      */
-    public void deleteRoomById(Long id);
+    void deleteRoomById(Long id);
 
     /**
      * update room
@@ -43,6 +43,6 @@ public interface RoomService {
      * @param roomDto given changes
      * @param id      room's id
      */
-    public void updateRoom(RoomDto roomDto, Long id);
+    void updateRoom(RoomDto roomDto, Long id);
 
 }

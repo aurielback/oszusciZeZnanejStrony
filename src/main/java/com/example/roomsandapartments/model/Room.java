@@ -30,6 +30,10 @@ public class Room {
     )
     private boolean specialEquipment;
 
+    @ManyToOne
+    @JoinColumn(name = "announcement_id")
+    private Announcement announcement;
+
     public Room() {
     }
 
@@ -53,6 +57,23 @@ public class Room {
         this.area = area;
         this.standardEquipment = standardEquipment;
         this.specialEquipment = specialEquipment;
+    }
+
+    public Room(Long id, Long version, double area, boolean standardEquipment, boolean specialEquipment, Announcement announcement) {
+        this.id = id;
+        this.version = version;
+        this.area = area;
+        this.standardEquipment = standardEquipment;
+        this.specialEquipment = specialEquipment;
+        this.announcement = announcement;
+    }
+
+    public Announcement getAnnouncement() {
+        return announcement;
+    }
+
+    public void setAnnouncement(Announcement announcement) {
+        this.announcement = announcement;
     }
 
     public Long getVersion() {

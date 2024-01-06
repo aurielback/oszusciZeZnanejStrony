@@ -14,14 +14,14 @@ public interface AnnouncementService {
      * @param announcementDto transfer object of Announcement entity
      */
 
-    public void addAnnouncement(AnnouncementDto announcementDto);
+    void addAnnouncement(AnnouncementDto announcementDto);
 
     /**
      * get all announcements from database
      *
      * @return AnnouncementDto
      */
-    public List<AnnouncementDto> getAllAnnouncements();
+    List<AnnouncementDto> getAllAnnouncements();
 
     /**
      * get announcement by id
@@ -29,14 +29,14 @@ public interface AnnouncementService {
      * @param id announcement's id
      * @return optional Announcement
      */
-    public AnnouncementDto findAnnouncementById(Long id);
+    AnnouncementDto findAnnouncementById(Long id);
 
     /**
      * delete announcement by id
      *
      * @param id announcement's id
      */
-    public void deleteAnnouncementById(Long id);
+    void deleteAnnouncementById(Long id);
 
     /**
      * update announcement
@@ -44,6 +44,6 @@ public interface AnnouncementService {
      * @param announcementDto given changes
      * @param id              announcement's id
      */
-    public void updateAnnouncement(AnnouncementDto announcementDto, Long id);
+    void updateAnnouncement(AnnouncementDto announcementDto, Long id);
 
 }
