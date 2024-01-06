@@ -1,15 +1,20 @@
 package com.example.roomsandapartments.service.serviceImpl;
 
 import com.example.roomsandapartments.dto.RoomDto;
-import com.example.roomsandapartments.exceptions.RoomNotFoundException;
+import com.example.roomsandapartments.exceptions.AnnouncementExceptions.AnnouncementNotSavedException;
+import com.example.roomsandapartments.exceptions.RoomExceptions.RoomNotFoundException;
+import com.example.roomsandapartments.exceptions.RoomExceptions.RoomNotSavedException;
 import com.example.roomsandapartments.mappers.RoomMapper;
 
 import com.example.roomsandapartments.model.Room;
 import com.example.roomsandapartments.repository.RoomRepository;
 import com.example.roomsandapartments.service.RoomService;
+import jakarta.transaction.Transactional;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoomServiceImpl implements RoomService {
@@ -26,8 +31,15 @@ public class RoomServiceImpl implements RoomService {
      * Add room to database
      * @param roomDto transfer object of Room entity
      */
+    @Transactional(rollbackOn = RoomNotSavedException.class)
     public void addRoom(RoomDto roomDto) {
-        roomRepository.save(roomMapper.roomDtoToRoomEntity(roomDto));
+        Optional.ofNullable(roomDto)
+                .orElseThrow(() -> new IllegalArgumentException("Room cannot be null"));
+        try {
+            roomRepository.save(roomMapper.roomDtoToRoomEntity(roomDto));
+        } catch (DataAccessException e) {
+            throw new RoomNotSavedException(e.toString());
+        }
     }
 
     /**

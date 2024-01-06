@@ -1,7 +1,8 @@
 package com.example.roomsandapartments.service.serviceImpl;
 
 import com.example.roomsandapartments.dto.AnnouncementDto;
-import com.example.roomsandapartments.exceptions.AnnouncementNotFoundException;
+import com.example.roomsandapartments.exceptions.AnnouncementExceptions.AnnouncementNotFoundException;
+import com.example.roomsandapartments.exceptions.AnnouncementExceptions.AnnouncementNotSavedException;
 import com.example.roomsandapartments.mappers.AnnouncementMapper;
 import com.example.roomsandapartments.mappers.RoomMapper;
 import com.example.roomsandapartments.model.Announcement;
@@ -9,9 +10,11 @@ import com.example.roomsandapartments.model.Room;
 import com.example.roomsandapartments.repository.AnnouncementRepository;
 import com.example.roomsandapartments.repository.RoomRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AnnouncementServiceImpl {
@@ -32,11 +35,17 @@ public class AnnouncementServiceImpl {
      * Add announcement to database
      * @param announcementDto transfer object of Announcement entity
      */
-    @Transactional
+    @Transactional(rollbackOn = AnnouncementNotSavedException.class)
     public void addAnnouncement(AnnouncementDto announcementDto) {
-        Announcement announcementEntity = announcementMapper.announcementDtoToAnnouncementEntity(announcementDto);
-        roomRepository.saveAll(announcementEntity.getRooms());
-        announcementRepository.save(announcementEntity);
+        Optional.ofNullable(announcementDto)
+                .orElseThrow(() -> new IllegalArgumentException("AnnouncementDto cannot be null"));
+        try {
+            Announcement announcementEntity = announcementMapper.announcementDtoToAnnouncementEntity(announcementDto);
+            roomRepository.saveAll(announcementEntity.getRooms());
+            announcementRepository.save(announcementEntity);
+        } catch (DataAccessException e) {
+            throw new AnnouncementNotSavedException(e.toString());
+        }
     }
 
     /**

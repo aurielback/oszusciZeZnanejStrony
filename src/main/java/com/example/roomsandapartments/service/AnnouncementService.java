@@ -1,10 +1,6 @@
 package com.example.roomsandapartments.service;
 
 import com.example.roomsandapartments.dto.AnnouncementDto;
-import com.example.roomsandapartments.exceptions.AnnouncementNotFoundException;
-import com.example.roomsandapartments.model.Announcement;
-import com.example.roomsandapartments.model.Room;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

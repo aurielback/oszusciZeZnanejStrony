@@ -1,8 +1,6 @@
 package com.example.roomsandapartments.service;
 
 import com.example.roomsandapartments.dto.RoomDto;
-import com.example.roomsandapartments.exceptions.RoomNotFoundException;
-import com.example.roomsandapartments.model.Room;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

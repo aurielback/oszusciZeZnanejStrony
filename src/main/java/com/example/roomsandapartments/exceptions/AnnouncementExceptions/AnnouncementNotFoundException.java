@@ -1,4 +1,4 @@
-package com.example.roomsandapartments.exceptions;
+package com.example.roomsandapartments.exceptions.AnnouncementExceptions;
 
 public class AnnouncementNotFoundException extends RuntimeException {
 
