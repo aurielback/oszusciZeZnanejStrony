@@ -2,6 +2,7 @@ package com.example.roomsandapartments.controller;
 
 import com.example.roomsandapartments.dto.RoomDto;
 import com.example.roomsandapartments.service.serviceImpl.RoomServiceImpl;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,14 +14,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.Mockito.when;
-import com.fasterxml.jackson.databind.ObjectMapper; // Dla ObjectMapper
-
 import java.util.Arrays;
 import java.util.List;
 
-import static org.mockito.Mockito.*; // Dla when, doNothing, doAnswer, verify
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -132,7 +130,7 @@ public class RoomControllerTest {
         doNothing().when(roomServiceImpl).deleteRoomById(anyLong());
 
         ResultActions resultActions = mockMvc.perform(delete("/api/v1/room/" + id1)
-                .contentType(MediaType.APPLICATION_JSON))
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
         resultActions.andExpect(content().string("Deleted!"));

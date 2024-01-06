@@ -8,6 +8,7 @@ import org.mapstruct.Mapper;
 public interface AnnouncementMapper {
 
     Announcement announcementDtoToAnnouncementEntity(AnnouncementDto announcementDto);
+
     AnnouncementDto announcementEntityToAnnouncementDto(Announcement announcementEntity);
 
 }

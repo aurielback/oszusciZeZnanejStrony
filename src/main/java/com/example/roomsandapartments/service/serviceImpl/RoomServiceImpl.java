@@ -1,11 +1,9 @@
 package com.example.roomsandapartments.service.serviceImpl;
 
 import com.example.roomsandapartments.dto.RoomDto;
-import com.example.roomsandapartments.exceptions.AnnouncementExceptions.AnnouncementNotSavedException;
 import com.example.roomsandapartments.exceptions.RoomExceptions.RoomNotFoundException;
 import com.example.roomsandapartments.exceptions.RoomExceptions.RoomNotSavedException;
 import com.example.roomsandapartments.mappers.RoomMapper;
-
 import com.example.roomsandapartments.model.Room;
 import com.example.roomsandapartments.repository.RoomRepository;
 import com.example.roomsandapartments.service.RoomService;
@@ -29,6 +27,7 @@ public class RoomServiceImpl implements RoomService {
 
     /**
      * Add room to database
+     *
      * @param roomDto transfer object of Room entity
      */
     @Transactional(rollbackOn = RoomNotSavedException.class)
@@ -44,6 +43,7 @@ public class RoomServiceImpl implements RoomService {
 
     /**
      * get all rooms from database
+     *
      * @return RoomDto
      */
     public List<RoomDto> getAllRooms() {
@@ -54,6 +54,7 @@ public class RoomServiceImpl implements RoomService {
 
     /**
      * get room by id
+     *
      * @param id room's id
      * @return optional Room
      */
@@ -64,6 +65,7 @@ public class RoomServiceImpl implements RoomService {
 
     /**
      * delete room by id
+     *
      * @param id room's id
      */
     public void deleteRoomById(Long id) {
@@ -73,8 +75,9 @@ public class RoomServiceImpl implements RoomService {
 
     /**
      * update room
+     *
      * @param roomDto given changes
-     * @param id room's id
+     * @param id      room's id
      */
     public void updateRoom(RoomDto roomDto, Long id) {
         Room room = roomRepository.findById(id).orElseThrow(() -> new RoomNotFoundException(id));
