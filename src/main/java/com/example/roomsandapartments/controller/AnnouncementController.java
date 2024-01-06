@@ -1,9 +1,7 @@
 package com.example.roomsandapartments.controller;
 
 import com.example.roomsandapartments.dto.room.AnnouncementDto;
-import com.example.roomsandapartments.dto.room.RoomDto;
 import com.example.roomsandapartments.service.AnnouncementService;
-import com.example.roomsandapartments.service.RoomService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
