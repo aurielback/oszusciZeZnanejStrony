@@ -3,6 +3,8 @@ package com.example.roomsandapartments.dto;
 import com.example.roomsandapartments.model.Announcement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+
 public class RoomDto {
 
     @JsonProperty("room_id")
@@ -20,28 +22,27 @@ public class RoomDto {
     @JsonProperty("announcement_id")
     private Announcement announcement;
 
+    @JsonProperty("price")
+    private BigDecimal price;
+
     public RoomDto() {
     }
 
-    public RoomDto(double area, boolean standardEquipment, boolean specialEquipment) {
+    public RoomDto(double area, boolean standardEquipment, boolean specialEquipment, Announcement announcement, BigDecimal price) {
         this.area = area;
         this.standardEquipment = standardEquipment;
         this.specialEquipment = specialEquipment;
+        this.announcement = announcement;
+        this.price = price;
     }
 
-    public RoomDto(Long id, double area, boolean standardEquipment, boolean specialEquipment) {
-        this.id = id;
-        this.area = area;
-        this.standardEquipment = standardEquipment;
-        this.specialEquipment = specialEquipment;
-    }
-
-    public RoomDto(Long id, double area, boolean standardEquipment, boolean specialEquipment, Announcement announcement) {
+    public RoomDto(Long id, double area, boolean standardEquipment, boolean specialEquipment, Announcement announcement, BigDecimal price) {
         this.id = id;
         this.area = area;
         this.standardEquipment = standardEquipment;
         this.specialEquipment = specialEquipment;
         this.announcement = announcement;
+        this.price = price;
     }
 
     public Announcement getAnnouncement() {

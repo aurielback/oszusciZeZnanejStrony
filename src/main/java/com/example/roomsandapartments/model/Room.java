@@ -2,6 +2,8 @@ package com.example.roomsandapartments.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity(name = "room")
 public class Room {
 
@@ -30,6 +32,11 @@ public class Room {
     )
     private boolean specialEquipment;
 
+    @Column(
+            name = "price"
+    )
+    private BigDecimal price;
+
     @ManyToOne
     @JoinColumn(name = "announcement_id")
     private Announcement announcement;
@@ -37,35 +44,31 @@ public class Room {
     public Room() {
     }
 
-    public Room(double area, boolean standardEquipment, boolean specialEquipment) {
-        this.area = area;
-        this.standardEquipment = standardEquipment;
-        this.specialEquipment = specialEquipment;
-    }
-
-    public Room(Long id, double area, boolean standardEquipment, boolean specialEquipment) {
-        this.id = id;
-        this.area = area;
-        this.standardEquipment = standardEquipment;
-        this.specialEquipment = specialEquipment;
-
-    }
-
-    public Room(Long id, Long version, double area, boolean standardEquipment, boolean specialEquipment) {
-        this.id = id;
+    public Room(Long version, double area, boolean standardEquipment, boolean specialEquipment, BigDecimal price, Announcement announcement) {
         this.version = version;
         this.area = area;
         this.standardEquipment = standardEquipment;
         this.specialEquipment = specialEquipment;
-    }
-
-    public Room(Long id, Long version, double area, boolean standardEquipment, boolean specialEquipment, Announcement announcement) {
-        this.id = id;
-        this.version = version;
-        this.area = area;
-        this.standardEquipment = standardEquipment;
-        this.specialEquipment = specialEquipment;
+        this.price = price;
         this.announcement = announcement;
+    }
+
+    public Room(Long id, Long version, double area, boolean standardEquipment, boolean specialEquipment, BigDecimal price, Announcement announcement) {
+        this.id = id;
+        this.version = version;
+        this.area = area;
+        this.standardEquipment = standardEquipment;
+        this.specialEquipment = specialEquipment;
+        this.price = price;
+        this.announcement = announcement;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public Announcement getAnnouncement() {

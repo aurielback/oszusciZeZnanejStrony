@@ -46,6 +46,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
             announcementEntity.getRooms().forEach(
                     room -> room.setAnnouncement(announcementEntity)
             );
+            announcementEntity.setOverallPrice(announcementRepository.);
             roomRepository.saveAll(announcementEntity.getRooms());
             announcementRepository.save(announcementEntity);
         } catch (DataAccessException e) {

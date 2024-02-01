@@ -3,6 +3,7 @@ package com.example.roomsandapartments.model;
 import com.example.roomsandapartments.enums.City;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,27 +29,36 @@ public class Announcement {
     @OneToMany(mappedBy = "announcement")
     private List<Room> rooms = new ArrayList<>();
 
+    @Column(
+            name = "overall_price"
+    )
+    private BigDecimal overallPrice;
+
     public Announcement() {
     }
 
-    public Announcement(City city, List<Room> rooms) {
+    public Announcement(Long version, City city, List<Room> rooms, BigDecimal overallPrice) {
+        this.version = version;
         this.city = city;
         this.rooms = rooms;
+        this.overallPrice = overallPrice;
     }
 
-    public Announcement(Long id, City city, List<Room> rooms) {
-        this.id = id;
-        this.city = city;
-        this.rooms = rooms;
-    }
-
-    public Announcement(Long id, Long version, City city, List<Room> rooms) {
+    public Announcement(Long id, Long version, City city, List<Room> rooms, BigDecimal overallPrice) {
         this.id = id;
         this.version = version;
         this.city = city;
         this.rooms = rooms;
+        this.overallPrice = overallPrice;
     }
 
+    public BigDecimal getOverallPrice() {
+        return overallPrice;
+    }
+
+    public void setOverallPrice(BigDecimal overallPrice) {
+        this.overallPrice = overallPrice;
+    }
 
     public Long getVersion() {
         return version;

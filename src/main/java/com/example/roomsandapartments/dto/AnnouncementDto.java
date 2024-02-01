@@ -3,6 +3,7 @@ package com.example.roomsandapartments.dto;
 import com.example.roomsandapartments.enums.City;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,18 +18,31 @@ public class AnnouncementDto {
     @JsonProperty("rooms")
     private List<RoomDto> rooms = new ArrayList<>();
 
+    @JsonProperty("overall_price")
+    private BigDecimal overallPrice;
+
     public AnnouncementDto() {
     }
 
-    public AnnouncementDto(City city, List<RoomDto> rooms) {
+    public AnnouncementDto(City city, List<RoomDto> rooms, BigDecimal overallPrice) {
         this.city = city;
         this.rooms = rooms;
+        this.overallPrice = overallPrice;
     }
 
-    public AnnouncementDto(Long id, City city, List<RoomDto> rooms) {
+    public AnnouncementDto(Long id, City city, List<RoomDto> rooms, BigDecimal overallPrice) {
         this.id = id;
         this.city = city;
         this.rooms = rooms;
+        this.overallPrice = overallPrice;
+    }
+
+    public BigDecimal getOverallPrice() {
+        return overallPrice;
+    }
+
+    public void setOverallPrice(BigDecimal overallPrice) {
+        this.overallPrice = overallPrice;
     }
 
     public Long getId() {
